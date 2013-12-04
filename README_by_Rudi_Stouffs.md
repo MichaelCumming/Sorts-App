@@ -41,7 +41,7 @@ the sum specifies a disjunction of simple sorts,
 each of these sorts may or may not supply a form to the composite sort's
 metaform.
 
-##Functionality of the kernel
+###Functionality of the kernel
 
 ###A. Sorts and Metaforms: The basic approach.
 
