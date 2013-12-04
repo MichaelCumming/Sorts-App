@@ -1,0 +1,22 @@
+#SDL V1.1a [bige]
+
+sort typerefs : (types : [Label]);
+sort (hasrefs, isrefs) : [Property] (types, typerefs);
+sort typetree : types ^ hasrefs ^ typetree + types ^ typetree + types ^ hasrefs + types + typerefs ^ isrefs;
+
+form $types = typetree:
+{ (types ^ typetree):
+  { "physical"
+    { (types ^ hasrefs):
+      { #bige-types-24 "column"
+        { bige-typerefs-24 } },
+      types:
+      { "mosque", "complex", "properties" } },
+    "non-physical"
+    { types:
+      { "perceptual", "spatial", "process", "conceptual", "contextual" },
+      (typerefs ^ isrefs):
+      { #bige-typerefs-24 "column"
+        { bige-types-24 } } } },
+  types:
+  { "format" } };

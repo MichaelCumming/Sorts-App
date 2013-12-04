@@ -1,0 +1,35 @@
+#SDL V1.1a [me]
+
+sort types : [Label];
+sort graphical_elements : [LineSegment];
+sort costs : [Weight] (1.0);
+sort totalcosts : [NumericFunction];
+sort all : types ^ totalcosts ^ costs ^ graphical_elements;
+
+
+form $db = all:
+{   "wall"
+    {   product(costs.value,graphical_elements.length)
+        {   0.5
+            {   <(10,10,0), (50,10,0)>,
+                <(10,40,0), (10,10,0)>,
+                <(50,10,0), (50,40,0)>,
+                <(50,40,0), (10,40,0)>		
+            }
+        }
+    },
+    "door"
+    {   product(costs.value,graphical_elements.length)
+        {   0.6
+            {   <(25,10,0), (35,10,0)> }
+        }
+    },
+    "window"
+    {   product(costs.value,graphical_elements.length)
+        {   0.75
+            {   <(50,20,0), (50,30,0)>,
+                <(40,40,0), (25,40,0)> 
+            }
+        }
+    }
+};

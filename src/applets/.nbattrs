@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE attributes PUBLIC "-//NetBeans//DTD DefaultAttributes 1.0//EN" "http://www.netbeans.org/dtds/attributes-1_0.dtd">
+<attributes version="1.0">
+    <fileobject name="AbstractionsAppletMC1.java">
+        <attr name="class_dependency_applets.UserApplet" stringvalue="AbstractionsAppletMC1"/>
+    </fileobject>
+    <fileobject name="CompareApplet.java">
+        <attr name="class_dependency_applets.UserApplet" stringvalue="CompareApplet"/>
+    </fileobject>
+    <fileobject name="CompareApplet_17_2_2005.java">
+        <attr name="class_dependency_applets.UserApplet" stringvalue="CompareApplet_17_2_2005"/>
+    </fileobject>
+    <fileobject name="ConvertApplet_11_3_2005.java">
+        <attr name="class_dependency_applets.UserApplet" stringvalue="ConvertApplet_11_3_2005"/>
+    </fileobject>
+    <fileobject name="PointsApplet.java">
+        <attr name="class_dependency_applets.UserApplet" stringvalue="PointsApplet"/>
+    </fileobject>
+    <fileobject name="SortsApplet.java">
+        <attr name="class_dependency_applets.UserApplet" stringvalue="SortsApplet"/>
+    </fileobject>
+    <fileobject name="TypesApplet_17_2_2005.java">
+        <attr name="class_dependency_applets.UserApplet" stringvalue="TypesApplet_17_2_2005"/>
+    </fileobject>
+    <fileobject name="UserAppletX.java">
+        <attr name="class_dependency_java.applet.Applet" stringvalue="UserAppletX"/>
+    </fileobject>
+    <fileobject name="sortsDemo21.feb.2005.sdl">
+        <attr name="org.netbeans.modules.text.IsTextFile" boolvalue="true"/>
+    </fileobject>
+</attributes>

@@ -1,0 +1,17 @@
+#SDL V1.1a [rudi]
+
+sort lighttypes : [Label];
+sort intensity : [NumericFunction];
+sort intensityvalues : [Numeric];
+sort lights : lighttypes ^ intensity ^ intensityvalues;
+
+form $lights = lights:
+{ "type 1"
+{ sum(intensityvalues.value)
+{ 100 } },
+"type 2"
+{ sum(intensityvalues.value)
+{ 150 } },
+"type 3"
+{ sum(intensityvalues.value)
+{ 70 } } };

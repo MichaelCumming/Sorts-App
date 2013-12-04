@@ -1,0 +1,602 @@
+#SDL V1.0a [bige]
+
+sort typerefs : (types : [Label]);
+sort (hasrefs, isrefs) : [Property] (types, typerefs);
+sort typetree : types ^ typetree + types ^ hasrefs + types + typerefs ^ isrefs;
+
+sort ids : [Key] (doc);
+sort titles : [Label];
+sort doctypes : [Label];
+sort contents : doctypes ^ (urls : [Url]);
+sort dates : [Date] (nl, NL);
+sort creations : dates ^ (authors : [Label]);
+sort (fromlinks, tolinks) : [Property] (ids, ids);
+sort components : ids ^ (titles + contents + creations + typerefs + fromlinks ^ creations + tolinks + components);
+sort sources : [Label];
+sort documents : ids ^ (titles + contents + creations + sources + typerefs + fromlinks ^ creations + tolinks + components);
+sort classification : ids ^ (titles + typerefs + fromlinks ^ creations + tolinks + documents);
+
+form $types = typetree:
+{ (types ^ typetree): { "physical"
+{ (types ^ typetree): { "mosque"
+{ (types ^ typetree): { "structural"
+{ (types ^ hasrefs): { #bige-types-26 "arcade" { } },
+(types ^ typetree): { "arcade"
+{ (types ^ hasrefs): { #bige-types-11 "arch" { } },
+(types ^ typetree): { "arch"
+{ types: { "tympanum" } } },
+(types ^ hasrefs): { #bige-types-13 "dome" { } },
+(types ^ typetree): { "dome"
+{ (types ^ hasrefs): { #bige-types-5 "crescent" { } } } },
+(types ^ typetree): { "column"
+{ types: { "column base" },
+types: { "column capital" } } },
+types: { "spandrel" } } },
+(types ^ typetree): { "domed baldachin"
+{ (types ^ hasrefs): { #bige-types-9 "central dome" { } },
+(types ^ typetree): { "central dome"
+{ (types ^ typetree): { "drum"
+{ (types ^ hasrefs): { #bige-types-3 "fenestration" { } },
+(types ^ typetree): { "fenestration"
+{ (types ^ typetree): { "window"
+{ types: { "vitrail" } } } } } } },
+(typerefs ^ isrefs): { #bige-typerefs-1 "crescent" { bige-types-5 }},
+types: { "semi-spherical-dome" },
+types: { "half-dome" },
+types: { "quarter-dome" } } },
+(types ^ typetree): { "supporting structure"
+{ (typerefs ^ isrefs): { #bige-typerefs-2 "arch" { bige-types-11 }},
+(types ^ hasrefs): { #bige-types-12 "pier" { } },
+(types ^ typetree): { "weight tower"
+{ (typerefs ^ isrefs): { #bige-typerefs-3 "dome" { bige-types-13 }},
+(types ^ typetree): { "segmented dome"
+{ (typerefs ^ isrefs): { #bige-typerefs-4 "crescent" { bige-types-5 }} } } } },
+types: { "buttress" } } },
+(types ^ hasrefs): { #bige-types-21 "transitional structure" { } },
+(types ^ typetree): { "transitional structure"
+{ types: { "squinch" },
+types: { "pendentive" },
+(types ^ hasrefs): { #bige-types-20 "muqarnas" { } } } } } },
+(types ^ typetree): { "exterior shell"
+{ types: { "enclosure wall" },
+types: { "roof" } } } } },
+(types ^ typetree): { "organizational"
+{ (types ^ typetree): { "courtyard"
+{ (typerefs ^ isrefs): { #bige-typerefs-5 "arcade" { bige-types-26 }},
+(types ^ typetree): { "last place of assembly"
+{ (types ^ typetree): { "portico"
+{ (types ^ typetree): { "central bay"
+{ (typerefs ^ isrefs): { #bige-typerefs-6 "arch" { bige-types-11 }},
+(typerefs ^ isrefs): { #bige-typerefs-7 "dome" { bige-types-13 }},
+(types ^ hasrefs): { #bige-types-33 "main entrance" { } },
+(types ^ typetree): { "main entrance"
+{ (types ^ typetree): { "main door"
+{ (typerefs ^ isrefs): { #bige-typerefs-8 "muqarnas" { bige-types-20 }} } } } },
+(types ^ hasrefs): { #bige-types-34 "alinlik" { } } } } } } } },
+types: { "fountain" },
+(types ^ typetree): { "courtyard facade"
+{ (typerefs ^ isrefs): { #bige-typerefs-9 "fenestration" { bige-types-3 }},
+types: { "side courtyard facade" },
+(types ^ hasrefs): { #bige-types-42 "relieving arch" { } },
+(types ^ typetree): { "front courtyard facade"
+{ (types ^ typetree): { "portal"
+{ (typerefs ^ isrefs): { #bige-typerefs-10 "muqarnas" { bige-types-20 }},
+(typerefs ^ isrefs): { #bige-typerefs-11 "alinlik" { bige-types-34 }},
+types: { "pediment" },
+types: { "jamb" },
+(typerefs ^ isrefs): { #bige-typerefs-12 "relieving arch" { bige-types-42 }} } } } },
+(types ^ hasrefs): { #bige-types-46 "entrance" { } },
+(types ^ typetree): { "entrance"
+{ types: { "door" } } } } } } },
+(types ^ typetree): { "prayer hall"
+{ types: { "imam's platform" },
+(types ^ typetree): { "qibla wall"
+{ types: { "minbar" },
+(types ^ typetree): { "mihrab niche"
+{ (typerefs ^ isrefs): { #bige-typerefs-13 "muqarnas" { bige-types-20 }} } } } },
+(types ^ typetree): { "inrerior gallery"
+{ (typerefs ^ isrefs): { #bige-typerefs-14 "arcade" { bige-types-26 }},
+(types ^ hasrefs): { #bige-types-53 "balustrade" { } } } },
+(types ^ typetree): { "prayer hall facade"
+{ (typerefs ^ isrefs): { #bige-typerefs-15 "fenestration" { bige-types-3 }},
+(typerefs ^ isrefs): { #bige-typerefs-16 "arch" { bige-types-11 }},
+(typerefs ^ isrefs): { #bige-typerefs-17 "relieving arch" { bige-types-42 }},
+(types ^ typetree): { "front facade"
+{ (typerefs ^ isrefs): { #bige-typerefs-18 "main entrance" { bige-types-33 }} } },
+(types ^ typetree): { "side facade"
+{ (types ^ typetree): { "exterior gallery"
+{ (typerefs ^ isrefs): { #bige-typerefs-19 "arcade" { bige-types-26 }},
+(typerefs ^ isrefs): { #bige-typerefs-20 "entrance" { bige-types-46 }},
+(typerefs ^ isrefs): { #bige-typerefs-21 "balustrade" { bige-types-53 }} } } } },
+types: { "qibla facade" } } },
+(types ^ typetree): { "central space"
+{ (typerefs ^ isrefs): { #bige-typerefs-22 "central dome" { bige-types-9 }},
+(typerefs ^ isrefs): { #bige-typerefs-23 "arch" { bige-types-11 }},
+(typerefs ^ isrefs): { #bige-typerefs-24 "pier" { bige-types-12 }},
+(typerefs ^ isrefs): { #bige-typerefs-25 "transitional structure" { bige-types-21 }} } } } },
+(types ^ typetree): { "minaret"
+{ (typerefs ^ isrefs): { #bige-typerefs-26 "entrance" { bige-types-46 }},
+types: { "fluting" },
+(types ^ typetree): { "balcony"
+{ (typerefs ^ isrefs): { #bige-typerefs-27 "muqarnas" { bige-types-20 }},
+(typerefs ^ isrefs): { #bige-typerefs-28 "balustrade" { bige-types-53 }} } },
+(types ^ typetree): { "pinnacle"
+{ (typerefs ^ isrefs): { #bige-typerefs-29 "crescent" { bige-types-5 }} } } } } } },
+types: { "decoration" } } },
+types: { "complex" },
+(types ^ typetree): { "properties"
+{ (types ^ typetree): { "material"
+{ types: { "limestone" },
+types: { "red and white" },
+types: { "lead" },
+types: { "marble" } } },
+(types ^ typetree): { "size"
+{ types: { "dimension" } } } } } } },
+(types ^ typetree): { "non-physical"
+{ (types ^ typetree): { "perceptual"
+{ (types ^ typetree): { "light"
+{ types: { "luminosity" } } },
+types: { "color" },
+types: { "texture" },
+(types ^ typetree): { "view"
+{ types: { "visual unity" },
+types: { "visual communication" },
+types: { "visibility" } } },
+types: { "acoustics" },
+types: { "transparency" } } },
+(types ^ typetree): { "spatial"
+{ types: { "proportion" },
+(types ^ typetree): { "scale"
+{ types: { "generic" },
+types: { "human" } } },
+(types ^ typetree): { "organization"
+{ types: { "modular" },
+types: { "centralized" },
+types: { "linear" },
+(types ^ typetree): { "grid"
+{ types: { "bay" } } } } },
+(types ^ typetree): { "orientation"
+{ types: { "horizontal" },
+types: { "vertical" } } },
+(types ^ typetree): { "ordering"
+{ types: { "symmetry" },
+(types ^ typetree): { "axis"
+{ types: { "crossing" },
+types: { "parallel" } } },
+types: { "hierarchy" },
+(types ^ typetree): { "rhythm"
+{ types: { "repetition" } } },
+types: { "datum" },
+types: { "transformation" } } },
+(types ^ typetree): { "configuration"
+{ types: { "approach and entry" },
+types: { "path configuration and access" },
+types: { "function and activities" },
+types: { "sequence of spaces" },
+(types ^ typetree): { "volume"
+{ types: { "silhouette" } } } } } } },
+types: { "process" },
+(types ^ typetree): { "conceptual"
+{ (types ^ typetree): { "symbolism"
+{ types: { "man-society relationship" },
+types: { "man-God relationship" } } },
+(types ^ typetree): { "era"
+{ (types ^ hasrefs): { #bige-types-128 "social and cultural aspects" { } },
+(types ^ typetree): { "social and cultural aspects"
+{ types: { "politics" },
+types: { "religion" },
+types: { "tradition" } } } } },
+types: { "artistic expression" } } },
+(types ^ typetree): { "contextual"
+{ (types ^ typetree): { "program"
+{ (typerefs ^ isrefs): { #bige-typerefs-30 "social and cultural aspects" { bige-types-128 }},
+types: { "historical precedents" },
+types: { "economic aspects" },
+(types ^ typetree): { "dates"
+{ types: { "begin" },
+types: { "completion" } } },
+types: { "user requirements" },
+types: { "client requirements" },
+(types ^ typetree): { "architect"
+{ types: { "Sinan" } } },
+types: { "mosque name" },
+types: { "location" } } },
+(types ^ typetree): { "site"
+{ types: { "climate" },
+types: { "environment" },
+types: { "geography" },
+types: { "sensory" } } },
+(types ^ typetree): { "style"
+{ types: { "Ottoman" },
+types: { "Byzantian" },
+types: { "Renaissance" },
+types: { "Gothic" } } } } } } },
+(types ^ typetree): { "format"
+{ (types ^ typetree): { "drawing or sketch"
+{ types: { "diagram" },
+types: { "plan" },
+types: { "section" },
+types: { "elevation" },
+types: { "perspective" },
+types: { "axonometric" } } },
+(types ^ typetree): { "photograph"
+{ types: { "grayscale" },
+types: { "full color" } } },
+types: { "text" } } } } ;
+
+form $documents = classification:
+{ #bige-ids-1 "doc-1"
+{ titles: { "Sehzade Mosque" },
+typerefs: { "mosque name" },
+documents:
+{ #bige-ids-4 "doc-4"
+{ titles: { "conceptual diagram of the central dome structure" },
+contents: { "img" { "sehzade31.jpg" } },
+creations: { "03-05-2000 14:32:09" { "0" } },
+sources: { "6" },
+typerefs: { "central space", "domed baldachin" },
+(fromlinks ^ creations): {
+bige-ids-34 { "31-07-2000 11:39:21" { "0" } } } },
+#bige-ids-5 "doc-5"
+{ titles: { "detailed plan" },
+contents: { "img" { "sehzade04.jpg" } },
+creations: { "03-05-2000 15:30:54" { "0" } },
+sources: { "5" },
+typerefs: { "mosque", "organizational" } },
+#bige-ids-6 "doc-6"
+{ titles: { "plan and longitudinal section" },
+contents: { "img" { "sehzade17.jpg" } },
+creations: { "03-05-2000 15:35:03" { "0" } },
+sources: { "3" },
+typerefs: { "mosque", "organizational", "structural" },
+components:
+{ #bige-ids-35 "doc-35"
+{ titles: { "longitudinal section highlighting the structural elements" },
+contents: { "img" { "sehzade17-a.jpg" } },
+creations: { "04-05-2000 12:46:00" { "0" } },
+typerefs: { "mosque", "structural", "organizational" } },
+#bige-ids-36 "doc-36"
+{ titles: { "plan highlighting different zones" },
+contents: { "img" { "sehzade17-b.jpg" } },
+creations: { "04-05-2000 12:49:06" { "0" } },
+typerefs: { "mosque", "structural", "organizational" },
+components:
+{ #bige-ids-54 "doc-54"
+{ titles: { "courtyard" },
+contents: { "img" { "sehzade17-b-2.jpg" } },
+creations: { "08-05-2000 10:00:42" { "0" } },
+typerefs: { "courtyard" } },
+#bige-ids-55 "doc-55"
+{ titles: { "prayer hall" },
+contents: { "img" { "sehzade17-b-1.jpg" } },
+creations: { "08-05-2000 10:01:53" { "0" } },
+typerefs: { "prayer hall", "minaret" },
+components:
+{ #bige-ids-56 "doc-56"
+{ titles: { "front facade" },
+contents: { "img" { "sehzade17-b-1-a.jpg" } },
+creations: { "08-05-2000 10:05:15" { "0" } },
+typerefs: { "front facade", "main entrance" },
+components:
+{ #bige-ids-57 "doc-57"
+{ titles: { "fenestration on the front facade" },
+contents: { "img" { "sehzade17-b-1-a-1.jpg" } },
+creations: { "08-05-2000 10:07:13" { "0" } },
+typerefs: { "fenestration" } } } },
+#bige-ids-58 "doc-58"
+{ titles: { "side facade" },
+contents: { "img" { "sehzade17-b-1-b.jpg" } },
+creations: { "08-05-2000 10:08:35" { "0" } },
+typerefs: { "side facade" },
+components:
+{ #bige-ids-59 "doc-59"
+{ titles: { "exterior gallery" },
+contents: { "img" { "sehzade17-b-1-b-1.jpg" } },
+creations: { "08-05-2000 10:10:15" { "0" } },
+typerefs: { "exterior gallery" },
+components:
+{ #bige-ids-60 "doc-60"
+{ titles: { "side entrance to the prayer hall" },
+contents: { "img" { "sehzade17-b-1-b-1-a.jpg" } },
+creations: { "08-05-2000 10:11:40" { "0" } },
+typerefs: { "entrance" } } } } } },
+#bige-ids-61 "doc-61"
+{ titles: { "side facade" },
+contents: { "img" { "sehzade17-b-1-c.jpg" } },
+creations: { "08-05-2000 10:13:07" { "0" } },
+typerefs: { "side facade" } },
+#bige-ids-62 "doc-62"
+{ titles: { "qibla wall" },
+contents: { "img" { "sehzade17-b-1-d.jpg" } },
+creations: { "08-05-2000 10:14:13" { "0" } },
+typerefs: { "qibla facade", "qibla wall" } },
+#bige-ids-63 "doc-63"
+{ titles: { "central dome space" },
+contents: { "img" { "sehzade17-b-1-e.jpg" } },
+creations: { "08-05-2000 10:15:05" { "0" } },
+typerefs: { "central dome" },
+components:
+{ #bige-ids-64 "doc-64"
+{ titles: { "supporting pier" },
+contents: { "img" { "sehzade17-b-1-e-1.jpg" } },
+creations: { "08-05-2000 10:16:28" { "0" } },
+typerefs: { "pier" } } } },
+#bige-ids-65 "doc-65"
+{ titles: { "imam's platform in the prayer hall" },
+contents: { "img" { "sehzade17-b-1-f.jpg" } },
+creations: { "08-05-2000 10:17:27" { "0" } },
+typerefs: { "imam's platform" } },
+#bige-ids-66 "doc-66"
+{ titles: { "minaret" },
+contents: { "img" { "sehzade17-b-1-g.jpg" } },
+creations: { "08-05-2000 10:18:40" { "0" } },
+typerefs: { "minaret" } },
+#bige-ids-67 "doc-67"
+{ titles: { "minaret" },
+contents: { "img" { "sehzade17-b-1-h.jpg" } },
+creations: { "08-05-2000 10:19:07" { "0" } },
+typerefs: { "minaret" } } } } } } } },
+#bige-ids-7 "doc-7"
+{ titles: { "isometric chart of dome system" },
+contents: { "img" { "sehzade30.jpg" } },
+creations: { "03-05-2000 15:36:46" { "0" } },
+sources: { "5" },
+typerefs: { "domed baldachin", "central dome" } },
+#bige-ids-8 "doc-8"
+{ titles: { "the field of vision in relation to piers" },
+contents: { "img" { "sehzade27.jpg" } },
+creations: { "03-05-2000 15:40:45" { "0" } },
+sources: { "1" },
+typerefs: { "central space", "pier" } },
+#bige-ids-9 "doc-9"
+{ titles: { "conceptual development of the dome system" },
+contents: { "img" { "sehzade21.jpg" } },
+creations: { "03-05-2000 15:45:59" { "0" } },
+sources: { "6" },
+typerefs: { "domed baldachin" } },
+#bige-ids-10 "doc-10"
+{ titles: { "the setting of the mosque together with the complex" },
+contents: { "img" { "sehzade01.jpg" } },
+creations: { "03-05-2000 15:47:23" { "0" } },
+sources: { "1" },
+typerefs: { "mosque", "complex" } },
+#bige-ids-11 "doc-11"
+{ titles: { "axonometric view showing the dome configuration" },
+contents: { "img" { "sehzade15.jpg" } },
+creations: { "03-05-2000 15:49:33" { "0" } },
+sources: { "6" },
+typerefs: { "prayer hall", "exterior shell" } },
+#bige-ids-12 "doc-12"
+{ titles: { "a configurational comparison between two chapels and the Sehzade mosque" },
+contents: { "img" { "sehzade23.jpg" } },
+creations: { "03-05-2000 15:51:56" { "0" } },
+sources: { "6" },
+typerefs: { "prayer hall" } },
+#bige-ids-13 "doc-13"
+{ titles: { "longitudinal section" },
+contents: { "img" { "sehzade18.jpg" } },
+creations: { "03-05-2000 15:54:31" { "0" } },
+sources: { "5" },
+typerefs: { "mosque" } },
+#bige-ids-14 "doc-14"
+{ titles: { "qibla facade" },
+contents: { "img" { "sehzade29.jpg" } },
+creations: { "03-05-2000 15:55:42" { "0" } },
+sources: { "2" },
+typerefs: { "qibla facade" },
+components:
+{ #bige-ids-37 "doc-37"
+{ titles: { "a relieving arch over a window on the qibla facade" },
+contents: { "img" { "sehzade29-a.jpg" } },
+creations: { "04-05-2000 12:59:57" { "0" } },
+typerefs: { "relieving arch", "window" } },
+#bige-ids-38 "doc-38"
+{ titles: { "fenestration on the qibla facade" },
+contents: { "img" { "sehzade29-b.jpg" } },
+creations: { "04-05-2000 13:01:28" { "0" } },
+typerefs: { "fenestration" } } } },
+#bige-ids-15 "doc-15"
+{ titles: { "longitudinal section" },
+contents: { "img" { "sehzade22.jpg" } },
+creations: { "03-05-2000 15:56:46" { "0" } },
+sources: { "6" },
+typerefs: { "mosque" } },
+#bige-ids-16 "doc-16"
+{ titles: { "side elevation" },
+contents: { "img" { "sehzade24.jpg" } },
+creations: { "03-05-2000 15:57:35" { "0" } },
+sources: { "6" },
+typerefs: { "side facade", "minaret" } },
+#bige-ids-17 "doc-17"
+{ titles: { "interior view showing a pendentive and a quarter-dome" },
+contents: { "img" { "sehzade09.jpg" } },
+creations: { "03-05-2000 15:59:50" { "0" } },
+sources: { "2" },
+typerefs: { "arch", "pendentive", "quarter-dome" } },
+#bige-ids-18 "doc-18"
+{ titles: { "interior view showing the load transfer to the arches" },
+contents: { "img" { "sehzade10.jpg" } },
+creations: { "03-05-2000 16:07:17" { "0" } },
+sources: { "2" },
+typerefs: { "supporting structure" } },
+#bige-ids-19 "doc-19"
+{ titles: { "interior view showing the entrance" },
+contents: { "img" { "sehzade25.jpg" } },
+creations: { "03-05-2000 16:08:40" { "0" } },
+sources: { "7" },
+typerefs: { "prayer hall" } },
+#bige-ids-20 "doc-20"
+{ titles: { "interior view showing the structural clarity and and the lightness of the mosque" },
+contents: { "img" { "sehzade16.jpg" } },
+creations: { "03-05-2000 16:16:27" { "0" } },
+sources: { "3" },
+typerefs: { "prayer hall" } },
+#bige-ids-21 "doc-21"
+{ titles: { "interior view directed towards the mihrab revealing the luminosity in the space" },
+contents: { "img" { "sehzade12.jpg" } },
+creations: { "03-05-2000 16:18:18" { "0" } },
+sources: { "4" },
+typerefs: { "prayer hall" } },
+#bige-ids-22 "doc-22"
+{ titles: { "internal view showing the central dome structure" },
+contents: { "img" { "sehzade13.jpg" } },
+creations: { "03-05-2000 17:14:35" { "0" } },
+sources: { "4" },
+typerefs: { "domed baldachin", "central space" } },
+#bige-ids-23 "doc-23"
+{ titles: { "interior view of the dome system in the prayer hall" },
+contents: { "img" { "sehzade06.jpg" } },
+creations: { "03-05-2000 17:17:00" { "0" } },
+sources: { "5" },
+typerefs: { "domed baldachin", "central space" } },
+#bige-ids-24 "doc-24"
+{ titles: { "interior view showing the main dome and a semi-dome" },
+contents: { "img" { "sehzade07.jpg" } },
+creations: { "03-05-2000 17:19:04" { "0" } },
+sources: { "5" },
+typerefs: { "central dome" } },
+#bige-ids-25 "doc-25"
+{ titles: { "the minbar" },
+contents: { "img" { "sehzade26.jpg" } },
+creations: { "03-05-2000 17:20:32" { "0" } },
+sources: { "0" },
+typerefs: { "minbar" },
+components:
+{ #bige-ids-39 "doc-39"
+{ titles: { "wooden carving on the minbar" },
+contents: { "img" { "sehzade26-a.jpg" } },
+creations: { "04-05-2000 13:02:30" { "0" } },
+typerefs: { "decoration", "minbar" } } } },
+#bige-ids-26 "doc-26"
+{ titles: { "the courtyard arcades" },
+contents: { "img" { "sehzade20.jpg" } },
+creations: { "03-05-2000 17:21:45" { "0" } },
+sources: { "3" },
+typerefs: { "courtyard" } },
+#bige-ids-27 "doc-27"
+{ titles: { "view of the front facade of the prayer hall from the courtyard with the fountain in the foreground" },
+contents: { "img" { "sehzade03.jpg" } },
+creations: { "03-05-2000 17:23:22" { "0" } },
+sources: { "5" },
+typerefs: { "fountain", "central bay", "front facade" },
+components:
+{ #bige-ids-40 "doc-40"
+{ titles: { "fountain at the center of the courtyard" },
+contents: { "img" { "sehzade03-a.jpg" } },
+creations: { "04-05-2000 13:04:02" { "0" } },
+typerefs: { "fountain" } },
+#bige-ids-41 "doc-41"
+{ titles: { "the decorative pediment over the central bay of the last place of assembly" },
+contents: { "img" { "sehzade03-b.jpg" } },
+creations: { "04-05-2000 13:08:47" { "0" } },
+typerefs: { "alinlik" } },
+#bige-ids-42 "doc-42"
+{ titles: { "the decorative pediment on the central bay and the dome over it" },
+contents: { "img" { "sehzade03-c.jpg" } },
+creations: { "04-05-2000 13:10:18" { "0" } },
+typerefs: { "dome", "alinlik" } },
+#bige-ids-43 "doc-43"
+{ titles: { "the central dome of the mosque as seen from the courtyard" },
+contents: { "img" { "sehzade03-d.jpg" } },
+creations: { "04-05-2000 13:12:09" { "0" } },
+typerefs: { "semi-spherical-dome" } },
+#bige-ids-44 "doc-44"
+{ titles: { "a weight tower on a corner of the central dome" },
+contents: { "img" { "sehzade03-e.jpg" } },
+creations: { "04-05-2000 13:13:30" { "0" } },
+typerefs: { "weight tower" } } } },
+#bige-ids-28 "doc-28"
+{ titles: { "side view of the prayer hall" },
+contents: { "img" { "sehzade19.jpg" } },
+creations: { "03-05-2000 17:26:03" { "0" } },
+sources: { "3" },
+typerefs: { "side facade" } },
+#bige-ids-29 "doc-29"
+{ titles: { "exterior view showing the side and qibla facades" },
+contents: { "img" { "sehzade14.jpg" } },
+creations: { "03-05-2000 17:27:36" { "0" } },
+sources: { "4" },
+typerefs: { "side facade", "qibla facade" } },
+#bige-ids-30 "doc-30"
+{ titles: { "side view of the mosque" },
+contents: { "img" { "sehzade08.jpg" } },
+creations: { "03-05-2000 17:28:50" { "0" } },
+sources: { "2" },
+typerefs: { "side facade", "side courtyard facade" } },
+#bige-ids-31 "doc-31"
+{ titles: { "exterior view showing the side of the courtyard and the side entrance" },
+contents: { "img" { "sehzade02.jpg" } },
+creations: { "03-05-2000 17:30:03" { "0" } },
+sources: { "5" },
+typerefs: { "side courtyard facade" },
+components:
+{ #bige-ids-45 "doc-45"
+{ titles: { "relieving arches on the side courtyard facade" },
+contents: { "img" { "sehzade02-a.jpg" } },
+creations: { "04-05-2000 13:16:15" { "0" } },
+typerefs: { "relieving arch" } },
+#bige-ids-46 "doc-46"
+{ titles: { "a side entrance to the courtyard" },
+contents: { "img" { "sehzade02-b.jpg" } },
+creations: { "04-05-2000 13:18:13" { "0" } },
+typerefs: { "entrance" } },
+#bige-ids-47 "doc-47"
+{ titles: { "fenestration on the side of the courtyard" },
+contents: { "img" { "sehzade02-c.jpg" } },
+creations: { "04-05-2000 13:19:53" { "0" } },
+typerefs: { "fenestration" } } } },
+#bige-ids-32 "doc-32"
+{ titles: { "exterior view of the prayer hall" },
+contents: { "img" { "sehzade11.jpg" } },
+creations: { "03-05-2000 17:32:36" { "0" } },
+sources: { "2" },
+typerefs: { "exterior shell", "domed baldachin" } },
+#bige-ids-33 "doc-33"
+{ titles: { "close-up view of the minaret" },
+contents: { "img" { "sehzade05.jpg" } },
+creations: { "03-05-2000 17:34:33" { "0" } },
+sources: { "5" },
+typerefs: { "minaret" },
+components:
+{ #bige-ids-48 "doc-48"
+{ titles: { "balcony on a minaret" },
+contents: { "img" { "sehzade05-a.jpg" } },
+creations: { "04-05-2000 13:20:52" { "0" } },
+typerefs: { "balcony" } },
+#bige-ids-49 "doc-49"
+{ titles: { "muqarnas under the balcony of a minaret" },
+contents: { "img" { "sehzade05-b.jpg" } },
+creations: { "04-05-2000 13:21:55" { "0" } },
+typerefs: { "muqarnas", "minaret" } },
+#bige-ids-50 "doc-50"
+{ titles: { "balustrade on the balcony of a minaret" },
+contents: { "img" { "sehzade05-c.jpg" } },
+creations: { "04-05-2000 13:24:13" { "0" } },
+typerefs: { "balustrade" } },
+#bige-ids-51 "doc-51"
+{ titles: { "fluting and decoration on a minaret" },
+contents: { "img" { "sehzade05-d.jpg" } },
+creations: { "04-05-2000 13:25:08" { "0" } },
+typerefs: { "fluting" } },
+#bige-ids-52 "doc-52"
+{ titles: { "decoration on a minaret" },
+contents: { "img" { "sehzade05-e.jpg" } },
+creations: { "04-05-2000 13:25:57" { "0" } },
+typerefs: { "decoration", "minaret" } },
+#bige-ids-53 "doc-53"
+{ titles: { "detail of decoration on the balustrade of the balcony of a minaret" },
+contents: { "img" { "sehzade05-f.jpg" } },
+creations: { "04-05-2000 13:26:53" { "0" } },
+typerefs: { "decoration", "balustrade", "minaret" } } } },
+#bige-ids-34 "doc-34"
+{ titles: { "a muqarnas" },
+contents: { "img" { "sehzade28.jpg" } },
+creations: { "03-05-2000 17:35:29" { "0" } },
+sources: { "2" },
+typerefs: { "muqarnas" } } } },
+#bige-ids-2 "doc-2"
+{ titles: { "Suleymaniye Mosque" },
+typerefs: { "mosque name" } },
+#bige-ids-3 "doc-3"
+{ titles: { "Selimiye Mosque" },
+typerefs: { "mosque name" } } };

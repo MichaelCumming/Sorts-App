@@ -1,0 +1,13 @@
+#SDL V1.1a [sortsDemo1]
+
+sort types : [Label];
+sort graphical_elements : [LineSegment];
+sort costs : [Weight] (1.0);
+sort all : types ^ graphical_elements + types ^ costs;
+
+-----------------------------------
+
+form $db = all:
+{ (types ^ graphical_elements):
+	{ "wall"
+		{ 

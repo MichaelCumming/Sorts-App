@@ -1,0 +1,17 @@
+#SDL V1.1a
+
+sort typerefs : (types : [Label]);
+sort (hasrefs, isrefs) : [Property] (types, typerefs);
+sort typetree : types ^ typetree + types ^ hasrefs + types + typerefs ^ isrefs;
+
+sort ids : [Key] (doc);
+sort titles : [Label];
+sort doctypes : [Label];
+sort contents : doctypes ^ (urls : [Url]);
+sort dates : [Date] (nl, NL);
+sort creations : dates ^ (authors : [Label]);
+sort (fromlinks, tolinks) : [Property] (ids, ids);
+sort components : ids ^ (titles + contents + creations + typerefs + fromlinks ^ creations + tolinks + components);
+sort sources : [Label];
+sort documents : ids ^ (titles + contents + creations + sources + typerefs + fromlinks ^ creations + tolinks + components);
+sort classification : ids ^ (titles + typerefs + fromlinks ^ creations + tolinks + documents);

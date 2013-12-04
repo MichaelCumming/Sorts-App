@@ -1,0 +1,213 @@
+#SDL V1.1a [bige]
+
+sort typerefs : (types : [Label]);
+sort (hasrefs, isrefs) : [Property] (types, typerefs);
+sort typetree : types ^ typetree + types ^ hasrefs + types + typerefs ^ isrefs;
+
+form $types = typetree:
+{ (types ^ typetree): { "physical"
+{ (types ^ typetree): { "mosque"
+{ (types ^ typetree): { "structural"
+{ (types ^ hasrefs): { #bige-types-26 "arcade" { } },
+(types ^ typetree): { "arcade"
+{ (types ^ hasrefs): { #bige-types-11 "arch" { } },
+(types ^ typetree): { "arch"
+{ types: { "tympanum"  } } },
+(types ^ hasrefs): { #bige-types-13 "dome" { } },
+(types ^ typetree): { "dome"
+{ (types ^ hasrefs): { #bige-types-5 "crescent" { }  } } },
+(types ^ typetree): { "column"
+{ types: { "column base" },
+types: { "column capital"  } } },
+types: { "spandrel"  } } },
+(types ^ typetree): { "domed baldachin"
+{ (types ^ hasrefs): { #bige-types-9 "central dome" { } },
+(types ^ typetree): { "central dome"
+{ (types ^ typetree): { "drum"
+{ (types ^ hasrefs): { #bige-types-3 "fenestration" { } },
+(types ^ typetree): { "fenestration"
+{ (types ^ typetree): { "window"
+{ types: { "vitrail"  } }  } }  } } },
+(typerefs ^ isrefs): { #bige-typerefs-1 "crescent" { bige-types-5 }},
+types: { "semi-spherical-dome" },
+types: { "half-dome" },
+types: { "quarter-dome"  } } },
+(types ^ typetree): { "supporting structure"
+{ (typerefs ^ isrefs): { #bige-typerefs-2 "arch" { bige-types-11 }},
+(types ^ hasrefs): { #bige-types-12 "pier" { } },
+(types ^ typetree): { "weight tower"
+{ (typerefs ^ isrefs): { #bige-typerefs-3 "dome" { bige-types-13 }},
+(types ^ typetree): { "segmented dome"
+{ (typerefs ^ isrefs): { #bige-typerefs-4 "crescent" { bige-types-5 } } }  } } },
+types: { "buttress"  } } },
+(types ^ hasrefs): { #bige-types-21 "transitional structure" { } },
+(types ^ typetree): { "transitional structure"
+{ types: { "squinch" },
+types: { "pendentive" },
+(types ^ hasrefs): { #bige-types-20 "muqarnas" { }  } }  } } },
+(types ^ typetree): { "exterior shell"
+{ types: { "enclosure wall" },
+types: { "roof"  } }  } } },
+(types ^ typetree): { "organizational"
+{ (types ^ typetree): { "courtyard"
+{ (typerefs ^ isrefs): { #bige-typerefs-5 "arcade" { bige-types-26 }},
+(types ^ typetree): { "last place of assembly"
+{ (types ^ typetree): { "portico"
+{ (types ^ typetree): { "central bay"
+{ (typerefs ^ isrefs): { #bige-typerefs-6 "arch" { bige-types-11 }},
+(typerefs ^ isrefs): { #bige-typerefs-7 "dome" { bige-types-13 }},
+(types ^ hasrefs): { #bige-types-33 "main entrance" { } },
+(types ^ typetree): { "main entrance"
+{ (types ^ typetree): { "main door"
+{ (typerefs ^ isrefs): { #bige-typerefs-8 "muqarnas" { bige-types-20 } } }  } } },
+(types ^ hasrefs): { #bige-types-34 "alinlik" { }  } }  } }  } } },
+types: { "fountain" },
+(types ^ typetree): { "courtyard facade"
+{ (typerefs ^ isrefs): { #bige-typerefs-9 "fenestration" { bige-types-3 }},
+types: { "side courtyard facade" },
+(types ^ hasrefs): { #bige-types-42 "relieving arch" { } },
+(types ^ typetree): { "front courtyard facade"
+{ (types ^ typetree): { "portal"
+{ (typerefs ^ isrefs): { #bige-typerefs-10 "muqarnas" { bige-types-20 }},
+(typerefs ^ isrefs): { #bige-typerefs-11 "alinlik" { bige-types-34 }},
+types: { "pediment" },
+types: { "jamb" },
+(typerefs ^ isrefs): { #bige-typerefs-12 "relieving arch" { bige-types-42 } } }  } } },
+(types ^ hasrefs): { #bige-types-46 "entrance" { } },
+(types ^ typetree): { "entrance"
+{ types: { "door"  } }  } }  } } },
+(types ^ typetree): { "prayer hall"
+{ types: { "imam's platform" },
+(types ^ typetree): { "qibla wall"
+{ types: { "minbar" },
+(types ^ typetree): { "mihrab niche"
+{ (typerefs ^ isrefs): { #bige-typerefs-13 "muqarnas" { bige-types-20 } } }  } } },
+(types ^ typetree): { "inrerior gallery"
+{ (typerefs ^ isrefs): { #bige-typerefs-14 "arcade" { bige-types-26 }},
+(types ^ hasrefs): { #bige-types-53 "balustrade" { }  } } },
+(types ^ typetree): { "prayer hall facade"
+{ (typerefs ^ isrefs): { #bige-typerefs-15 "fenestration" { bige-types-3 }},
+(typerefs ^ isrefs): { #bige-typerefs-16 "arch" { bige-types-11 }},
+(typerefs ^ isrefs): { #bige-typerefs-17 "relieving arch" { bige-types-42 }},
+(types ^ typetree): { "front facade"
+{ (typerefs ^ isrefs): { #bige-typerefs-18 "main entrance" { bige-types-33 } } } },
+(types ^ typetree): { "side facade"
+{ (types ^ typetree): { "exterior gallery"
+{ (typerefs ^ isrefs): { #bige-typerefs-19 "arcade" { bige-types-26 }},
+(typerefs ^ isrefs): { #bige-typerefs-20 "entrance" { bige-types-46 }},
+(typerefs ^ isrefs): { #bige-typerefs-21 "balustrade" { bige-types-53 } } }  } } },
+types: { "qibla facade"  } } },
+(types ^ typetree): { "central space"
+{ (typerefs ^ isrefs): { #bige-typerefs-22 "central dome" { bige-types-9 }},
+(typerefs ^ isrefs): { #bige-typerefs-23 "arch" { bige-types-11 }},
+(typerefs ^ isrefs): { #bige-typerefs-24 "pier" { bige-types-12 }},
+(typerefs ^ isrefs): { #bige-typerefs-25 "transitional structure" { bige-types-21 } } }  } } },
+(types ^ typetree): { "minaret"
+{ (typerefs ^ isrefs): { #bige-typerefs-26 "entrance" { bige-types-46 }},
+types: { "fluting" },
+(types ^ typetree): { "balcony"
+{ (typerefs ^ isrefs): { #bige-typerefs-27 "muqarnas" { bige-types-20 }},
+(typerefs ^ isrefs): { #bige-typerefs-28 "balustrade" { bige-types-53 } } } },
+(types ^ typetree): { "pinnacle"
+{ (typerefs ^ isrefs): { #bige-typerefs-29 "crescent" { bige-types-5 } } }  } }  } } },
+types: { "decoration"  } } },
+types: { "complex" },
+(types ^ typetree): { "properties"
+{ (types ^ typetree): { "material"
+{ types: { "limestone" },
+types: { "red and white" },
+types: { "lead" },
+types: { "marble"  } } },
+(types ^ typetree): { "size"
+{ types: { "dimension"  } }  } }  } } },
+(types ^ typetree): { "non-physical"
+{ (types ^ typetree): { "perceptual"
+{ (types ^ typetree): { "light"
+{ types: { "luminosity"  } } },
+types: { "color" },
+types: { "texture" },
+(types ^ typetree): { "view"
+{ types: { "visual unity" },
+types: { "visual communication" },
+types: { "visibility"  } } },
+types: { "acoustics" },
+types: { "transparency"  } } },
+(types ^ typetree): { "spatial"
+{ types: { "proportion" },
+(types ^ typetree): { "scale"
+{ types: { "generic" },
+types: { "human"  } } },
+(types ^ typetree): { "organization"
+{ types: { "modular" },
+types: { "centralized" },
+types: { "linear" },
+(types ^ typetree): { "grid"
+{ types: { "bay"  } }  } } },
+(types ^ typetree): { "orientation"
+{ types: { "horizontal" },
+types: { "vertical"  } } },
+(types ^ typetree): { "ordering"
+{ types: { "symmetry" },
+(types ^ typetree): { "axis"
+{ types: { "crossing" },
+types: { "parallel"  } } },
+types: { "hierarchy" },
+(types ^ typetree): { "rhythm"
+{ types: { "repetition"  } } },
+types: { "datum" },
+types: { "transformation"  } } },
+(types ^ typetree): { "configuration"
+{ types: { "approach and entry" },
+types: { "path configuration and access" },
+types: { "function and activities" },
+types: { "sequence of spaces" },
+(types ^ typetree): { "volume"
+{ types: { "silhouette"  } }  } }  } } },
+types: { "process" },
+(types ^ typetree): { "conceptual"
+{ (types ^ typetree): { "symbolism"
+{ types: { "man-society relationship" },
+types: { "man-God relationship"  } } },
+(types ^ typetree): { "era"
+{ (types ^ hasrefs): { #bige-types-128 "social and cultural aspects" { } },
+(types ^ typetree): { "social and cultural aspects"
+{ types: { "politics" },
+types: { "religion" },
+types: { "tradition"  } }  } } },
+types: { "artistic expression"  } } },
+(types ^ typetree): { "contextual"
+{ (types ^ typetree): { "program"
+{ (typerefs ^ isrefs): { #bige-typerefs-30 "social and cultural aspects" { bige-types-128 }},
+types: { "historical precedents" },
+types: { "economic aspects" },
+(types ^ typetree): { "dates"
+{ types: { "begin" },
+types: { "completion"  } } },
+types: { "user requirements" },
+types: { "client requirements" },
+(types ^ typetree): { "architect"
+{ types: { "Sinan"  } } },
+types: { "mosque name" },
+types: { "location"  } } },
+(types ^ typetree): { "site"
+{ types: { "climate" },
+types: { "environment" },
+types: { "geography" },
+types: { "sensory"  } } },
+(types ^ typetree): { "style"
+{ types: { "Ottoman" },
+types: { "Byzantian" },
+types: { "Renaissance" },
+types: { "Gothic"  } }  } }  } } },
+(types ^ typetree): { "format"
+{ (types ^ typetree): { "drawing or sketch"
+{ types: { "diagram" },
+types: { "plan" },
+types: { "section" },
+types: { "elevation" },
+types: { "perspective" },
+types: { "axonometric"  } } },
+(types ^ typetree): { "photograph"
+{ types: { "grayscale" },
+types: { "full color"  } } },
+types: { "text"  } }  } } ;

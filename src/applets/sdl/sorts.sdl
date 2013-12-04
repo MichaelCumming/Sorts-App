@@ -1,0 +1,19 @@
+#SDL V1.1a
+
+sort points : [Point];
+sort labels : [Label];
+sort morepoints : points;
+sort morelabels : labels;
+sort otherpoints : [Point];
+sort otherlabels : [Label];
+sort labeledpoints : points ^ labels;
+sort morelabeledpoints : morepoints ^ morelabels;
+sort otherlabeledpoints : otherpoints ^ otherlabels;
+sort lines : [Line];
+sort position_labels : labels ^ points;
+sort my_labeled_points : points ^ labels;
+sort all_points : labeledpoints + points;
+sort all_my_points : my_labeled_points + points;
+sort first : points ^ labeledpoints;
+sort second : points ^ my_labeled_points;
+sort third : points ^ points ^ labels;

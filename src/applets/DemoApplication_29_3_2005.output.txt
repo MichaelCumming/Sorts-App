@@ -1,0 +1,192 @@
+// func dist2lnseg(pt, tail, head) = if (- (head - tail) * (tail - pt) / sqr(head - tail)) < 0 then mag(tail - pt) else if (- (head - tail) * (tail - pt) / sqr(head - tail)) > 1 then mag(head - pt) else mag((head - tail) xprod (tail - pt)) / mag(head - tail);
+// func min(x) = m : {m(0) = inf, m(+1) = if (x < m) then x else m};
+// func sum(x) = s : {s(0) = 0.0, s(+1) = s + x};
+// func count(x) = c : {c(0) = 0.0, c(+1) = c + 1};
+// func product(x, y) = x * y;
+// func avg(x) = s/c : {s(0) = 0.0, s(+1) = s + x, c(0) = 0.0, c(+1) = c + 1};
+
+sort elements : [LineSegment];
+
+form $step1 = elements:
+{ <10(1,1,0), 10(1,4,0)>,
+  <10(5,1,0), 10(5,4,0)>,
+  <10(1,1,0), 10(5,1,0)>,
+  <10(1,4,0), 10(5,4,0)> };
+
+sort types : [Label];
+
+form $step2 = (elements ^ types):
+{ <10(1,1,0), 10(1,4,0)>
+    { "wall" },
+  <10(5,1,0), 10(5,4,0)>
+    { "wall" },
+  <10(5,2,0), 10(5,3,0)>
+    { "window" },
+  <10(1,1,0), 10(5,1,0)>
+    { "wall" },
+  <5(5,2,0), 5(7,2,0)>
+    { "door" },
+  <10(1,4,0), 10(5,4,0)>
+    { "wall" },
+  <5(5,8,0), 40(1,1,0)>
+    { "window" } };
+
+
+form $step3 = (types ^ elements):
+{ "door"
+    { <5(5,2,0), 5(7,2,0)> },
+  "wall"
+    { <10(1,1,0), 10(1,4,0)>,
+      <10(5,1,0), 10(5,4,0)>,
+      <10(1,1,0), 10(5,1,0)>,
+      <10(1,4,0), 10(5,4,0)> },
+  "window"
+    { <10(5,2,0), 10(5,3,0)>,
+      <5(5,8,0), 40(1,1,0)> } };
+
+sort functions : [Function];
+
+ind $step4 = (functions ^ types ^ elements): count(elements.length) = 7.0
+  { "door"
+      { <5(5,2,0), 5(7,2,0)> },
+    "wall"
+      { <10(1,1,0), 10(1,4,0)>,
+        <10(5,1,0), 10(5,4,0)>,
+        <10(1,1,0), 10(5,1,0)>,
+        <10(1,4,0), 10(5,4,0)> },
+    "window"
+      { <10(5,2,0), 10(5,3,0)>,
+        <5(5,8,0), 40(1,1,0)> } };
+
+
+form $step5 = (types ^ functions ^ elements):
+{ "door"
+    { count(elements.length) = 1.0
+        { <5(5,2,0), 5(7,2,0)> } },
+  "wall"
+    { count(elements.length) = 4.0
+        { <10(1,1,0), 10(1,4,0)>,
+          <10(5,1,0), 10(5,4,0)>,
+          <10(1,1,0), 10(5,1,0)>,
+          <10(1,4,0), 10(5,4,0)> } },
+  "window"
+    { count(elements.length) = 2.0
+        { <10(5,2,0), 10(5,3,0)>,
+          <5(5,8,0), 40(1,1,0)> } } };
+
+sort costs : [Weight] (1.0);
+
+ind $step6 = (functions ^ types ^ costs ^ elements): sum|product(costs.value,elements.length) = 94.75
+  { "door"
+      { 0.6
+          { <5(5,2,0), 5(7,2,0)> } },
+    "wall"
+      { 0.5
+          { <10(1,1,0), 10(1,4,0)>,
+            <10(5,1,0), 10(5,4,0)>,
+            <10(1,1,0), 10(5,1,0)>,
+            <10(1,4,0), 10(5,4,0)> } },
+    "window"
+      { 0.75
+          { <10(5,2,0), 10(5,3,0)>,
+            <5(5,8,0), 40(1,1,0)> } } };
+
+
+form $step7 = (types ^ functions ^ costs ^ elements):
+{ "door"
+    { sum|product(costs.value,elements.length) = 6.0
+        { 0.6
+            { <5(5,2,0), 5(7,2,0)> } } },
+  "wall"
+    { sum|product(costs.value,elements.length) = 70.0
+        { 0.5
+            { <10(1,1,0), 10(1,4,0)>,
+              <10(5,1,0), 10(5,4,0)>,
+              <10(1,1,0), 10(5,1,0)>,
+              <10(1,4,0), 10(5,4,0)> } } },
+  "window"
+    { sum|product(costs.value,elements.length) = 18.75
+        { 0.75
+            { <10(5,2,0), 10(5,3,0)>,
+              <5(5,8,0), 40(1,1,0)> } } } };
+
+sort positions : [Point];
+
+ind $step8 = (functions ^ positions ^ types ^ elements): avg|dist2lnseg(positions.position,elements.getTail,elements.getHead) = 17.142857142857142
+  { 10(3,2,0)
+      { "door"
+          { <5(5,2,0), 5(7,2,0)> },
+        "wall"
+          { <10(1,1,0), 10(1,4,0)>,
+            <10(5,1,0), 10(5,4,0)>,
+            <10(1,1,0), 10(5,1,0)>,
+            <10(1,4,0), 10(5,4,0)> },
+        "window"
+          { <10(5,2,0), 10(5,3,0)>,
+            <5(5,8,0), 40(1,1,0)> } } };
+
+
+form $step9 = (positions ^ types ^ elements ^ functions):
+{ 10(3,2,0)
+    { "door"
+        { <5(5,2,0), 5(7,2,0)>
+            { avg|dist2lnseg(positions.position,elements.getTail,elements.getHead) = 10.0 } },
+      "wall"
+        { <10(1,1,0), 10(1,4,0)>
+            { avg|dist2lnseg(positions.position,elements.getTail,elements.getHead) = 20.0 },
+          <10(5,1,0), 10(5,4,0)>
+            { avg|dist2lnseg(positions.position,elements.getTail,elements.getHead) = 20.0 },
+          <10(1,1,0), 10(5,1,0)>
+            { avg|dist2lnseg(positions.position,elements.getTail,elements.getHead) = 10.0 },
+          <10(1,4,0), 10(5,4,0)>
+            { avg|dist2lnseg(positions.position,elements.getTail,elements.getHead) = 20.0 } },
+      "window"
+        { <10(5,2,0), 10(5,3,0)>
+            { avg|dist2lnseg(positions.position,elements.getTail,elements.getHead) = 20.0 },
+          <5(5,8,0), 40(1,1,0)>
+            { avg|dist2lnseg(positions.position,elements.getTail,elements.getHead) = 20.0 } } } };
+
+
+ind $step10 = (functions ^ positions ^ types ^ elements ^ functions): min(functions.value) = 10.0
+  { 10(3,2,0)
+      { "door"
+          { <5(5,2,0), 5(7,2,0)>
+              { avg|dist2lnseg(positions.position,elements.getTail,elements.getHead) = 10.0 } },
+        "wall"
+          { <10(1,1,0), 10(1,4,0)>
+              { avg|dist2lnseg(positions.position,elements.getTail,elements.getHead) = 20.0 },
+            <10(5,1,0), 10(5,4,0)>
+              { avg|dist2lnseg(positions.position,elements.getTail,elements.getHead) = 20.0 },
+            <10(1,1,0), 10(5,1,0)>
+              { avg|dist2lnseg(positions.position,elements.getTail,elements.getHead) = 10.0 },
+            <10(1,4,0), 10(5,4,0)>
+              { avg|dist2lnseg(positions.position,elements.getTail,elements.getHead) = 20.0 } },
+        "window"
+          { <10(5,2,0), 10(5,3,0)>
+              { avg|dist2lnseg(positions.position,elements.getTail,elements.getHead) = 20.0 },
+            <5(5,8,0), 40(1,1,0)>
+              { avg|dist2lnseg(positions.position,elements.getTail,elements.getHead) = 20.0 } } } };
+
+
+form $step11 = (positions ^ types ^ functions ^ elements ^ functions):
+{ 10(3,2,0)
+    { "door"
+        { min(functions.value) = 10.0
+            { <5(5,2,0), 5(7,2,0)>
+                { avg|dist2lnseg(positions.position,elements.getTail,elements.getHead) = 10.0 } } },
+      "wall"
+        { min(functions.value) = 10.0
+            { <10(1,1,0), 10(1,4,0)>
+                { avg|dist2lnseg(positions.position,elements.getTail,elements.getHead) = 20.0 },
+              <10(5,1,0), 10(5,4,0)>
+                { avg|dist2lnseg(positions.position,elements.getTail,elements.getHead) = 20.0 },
+              <10(1,1,0), 10(5,1,0)>
+                { avg|dist2lnseg(positions.position,elements.getTail,elements.getHead) = 10.0 },
+              <10(1,4,0), 10(5,4,0)>
+                { avg|dist2lnseg(positions.position,elements.getTail,elements.getHead) = 20.0 } } },
+      "window"
+        { min(functions.value) = 20.0
+            { <10(5,2,0), 10(5,3,0)>
+                { avg|dist2lnseg(positions.position,elements.getTail,elements.getHead) = 20.0 },
+              <5(5,8,0), 40(1,1,0)>
+                { avg|dist2lnseg(positions.position,elements.getTail,elements.getHead) = 20.0 } } } } };

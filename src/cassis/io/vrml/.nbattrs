@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<attributes version="1.0">
+   <fileobject name="IccWorld.java">
+      <attr name="class_dependency_blue.io.GraphicsContext" stringvalue="IccWorld"/>
+   </fileobject>
+</attributes>

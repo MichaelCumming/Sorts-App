@@ -1,0 +1,115 @@
+#SDL V1.1a [me]
+
+// consider a plan of a room as a set of lines
+
+sort elements : [LineSegment];
+
+form $step1 = elements:
+{   <(10,10,0), (50,10,0)>,
+    <(10,40,0), (10,10,0)>,
+    <(50,10,0), (50,40,0)>,
+    <(50,40,0), (10,40,0)>		
+};
+
+// consider the lines dinstinguished by type, either wall, door or window;
+// therefore, we add a types attribute
+
+sort types : [Label];
+
+form $step2 = (elements ^ types):
+{   <(10,10,0), (50,10,0)>
+    { "wall" },
+    <(10,40,0), (10,10,0)>
+    { "wall" },
+    <(50,10,0), (50,40,0)>
+    { "wall" },
+    <(50,40,0), (10,40,0)>
+    { "wall" },
+    <(25,10,0), (35,10,0)>
+    { "door" },
+    <(50,20,0), (50,30,0)>
+    { "window" },
+    <(40,40,0), (25,40,0)>
+    { "window" }
+};
+
+// the former is classified primarily by geometry, we may also classify it
+// primarily by type; therefore, we switch the order of the sorts
+
+form $step3 = (types ^ elements): $step2;
+
+// in that case, we probably want to count them;
+// therefore, we add a function, with the types and elements as attribute;
+// in this way, we only need to add a single function
+
+sort functions : [NumericFunction];
+
+ind $step4 = (functions ^ types ^ elements): count(lines) $step3;
+
+// but this only gives an overall count, better is to count them by type;
+// therefore, we switch the order of the function(s) and types
+
+form $step5 = (types ^ functions ^ elements) : { $step 4 };
+
+// rather than counting them, we could also calculate their cost;
+// for this, we need to add a cost per unit length for each type
+// and replace the count function by a sum over product function
+
+sort costs : [Weight] (1.0);
+
+ind $step 6 = (functions ^ types ^ costs ^ elements):
+sum|product(costs.value, elements.length)
+{   0.5
+    {   "wall"
+        {   <(10,10,0), (50,10,0)>,
+            <(10,40,0), (10,10,0)>,
+            <(50,10,0), (50,40,0)>,
+            <(50,40,0), (10,40,0)>		
+        }
+    },
+    0.6
+    {   "door"
+        {   <(25,10,0), (35,10,0)> }
+    },
+    0.75
+    {   "window"
+        {   <(50,20,0), (50,30,0)>,
+            <(40,40,0), (25,40,0)> 
+        }
+    }
+};
+
+// or we can calculate the cost per type;
+// for this, we switch the order of the functions and types
+
+form $step7 = (types ^ functions ^ costs ^ elements): { $step6 };
+
+// finally, we can consider other functions for other purposes;
+// for example, we could calculate the distance from a certain point
+// within the room to each of the elements
+
+sort positions: [Point];
+
+ind $step8 = (functions ^ positions ^ types ^ elements):
+avg|distpt2ln(positions.position, elements.root, elements.direction)
+{   (30, 20, 0)
+    $step3
+};
+
+// this only gives us the average distance;
+// in order to determine teh distance to each element,
+// we need to make the function(s) an attribute to the elements
+
+form $step9 = (positions ^ types ^ elements ^ functions): { $step8 };
+
+// it could still be useful to also calculate the minimum distance;
+// for this, we add another function
+
+ind $step10 = (functions ^ positions ^ types ^ elements ^ functions):
+min(functions.value) $step9;
+
+// or, we can calculate the minimum distance per type, e.g.,
+// for emergency safety reasons
+
+form $step11 = (positions ^ types ^ functions ^ elements ^ functions): $step10;
+

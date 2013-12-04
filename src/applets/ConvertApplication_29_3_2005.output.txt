@@ -1,0 +1,52 @@
+all is convertible to target [3.2222222222222223#2/9] {2,0,0,2,0,0,0,0,0}
+  identical
+  totalcosts ^ costs ^ graphical_elements is convertible to graphical_elements ^ totalcosts ^ costs (through a rearrangement) [3.1666666666666665#1/6] {0,0,0,2,0,0,0,0,0}
+    graphical_elements ^ totalcosts ^ costs is equivalent to graphical_elements ^ totalcosts ^ costs [1.0#0] {0,0,0,0,0,0,0,0,0}
+      identical
+      identical
+
+
+form $db = all:
+{ "door"
+    { sum|product(costs.value,graphical_elements.length) = 6.0
+        { 0.6
+            { <5(5,2,0), 5(7,2,0)> } } },
+  "wall"
+    { sum|product(costs.value,graphical_elements.length) = 70.0
+        { 0.5
+            { <10(1,1,0), 10(1,4,0)>,
+              <10(5,1,0), 10(5,4,0)>,
+              <10(1,1,0), 10(5,1,0)>,
+              <10(1,4,0), 10(5,4,0)> } } },
+  "window"
+    { sum|product(costs.value,graphical_elements.length) = 18.75
+        { 0.75
+            { <10(5,2,0), 10(5,3,0)>,
+              <5(5,8,0), 40(1,1,0)> } } } };
+
+
+form $db2 = target:
+{ "door"
+    { <5(5,2,0), 5(7,2,0)>
+        { sum|product(costs.value,graphical_elements.length) = 6.0
+            { 0.6 } } },
+  "wall"
+    { <10(1,1,0), 10(1,4,0)>
+        { sum|product(costs.value,graphical_elements.length) = 15.0
+            { 0.5 } },
+      <10(5,1,0), 10(5,4,0)>
+        { sum|product(costs.value,graphical_elements.length) = 15.0
+            { 0.5 } },
+      <10(1,1,0), 10(5,1,0)>
+        { sum|product(costs.value,graphical_elements.length) = 20.0
+            { 0.5 } },
+      <10(1,4,0), 10(5,4,0)>
+        { sum|product(costs.value,graphical_elements.length) = 20.0
+            { 0.5 } } },
+  "window"
+    { <10(5,2,0), 10(5,3,0)>
+        { sum|product(costs.value,graphical_elements.length) = 7.5
+            { 0.75 } },
+      <5(5,8,0), 40(1,1,0)>
+        { sum|product(costs.value,graphical_elements.length) = 11.25
+            { 0.75 } } } };

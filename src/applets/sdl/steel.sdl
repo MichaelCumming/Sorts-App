@@ -1,0 +1,700 @@
+#SDL V1.1a [steel]
+
+sort domainnames : [Label];
+sort authornames : [Label];
+sort variablenames : [Label];
+sort attributenames : [Label];
+sort numericattributes : [Numeric];
+sort alphanumericattributes : [Label];
+sort constraintexpressions : [Label];
+sort constraintsolvers : [Url];
+sort storysteps : [ImageUrl];
+sort documents : [Url];
+sort images : [ImageUrl];
+sort (hasvariables, hasconstraints) : [Property] (constraintexpressions, variablenames);
+sort (issolvedby, solves) : [Property] (constraintexpressions, constraintsolvers);
+sort attributes : alphanumericattributes + numericattributes;
+sort solverattributes : attributes;
+sort solverproperties : attributenames ^ solverattributes + solves;
+sort solvers : constraintsolvers ^ solverproperties;
+sort constraintattributes : attributes;
+sort constraintproperties : attributenames ^ constraintattributes + hasvariables + issolvedby + solvers;
+sort domainconstraints : constraintexpressions ^ constraintproperties;
+sort architecture : domainconstraints;
+sort engineering : domainconstraints;
+sort contracting : domainconstraints;
+sort ventilation : domainconstraints;
+sort domains : architecture + contracting + engineering + ventilation;
+sort constraints : domainnames ^ domains;
+sort variableattributes : attributes;
+sort variableproperties : attributenames ^ variableattributes + domains + hasconstraints + issolvedby;
+sort variables : variablenames ^ variableproperties;
+sort authorattributes : attributes;
+sort authorproperties : attributenames ^ authorattributes;
+sort myconstraintproperties : attributenames ^ constraintattributes + hasvariables + issolvedby + solvers + variables;
+sort myconstraints : constraintexpressions ^ myconstraintproperties;
+sort authors : authornames + authornames ^ authorproperties;
+sort story : storysteps;
+sort data : documents + images;
+sort all : authors + constraints + data + solvers + story + variables;
+
+form $db = all:
+{ authors:
+    { (authornames ^ authorproperties):
+        { "architect"
+            { "domain"
+                { alphanumericattributes:
+                    { "architecture" } } },
+          "contractor"
+            { "domain"
+                { alphanumericattributes:
+                    { "contracting" } } },
+          "engineer"
+            { "domain"
+                { alphanumericattributes:
+                    { "engineering" } } },
+          "steel-group"
+            { "project"
+                { alphanumericattributes:
+                    { "steel" } } },
+          "vexpert"
+            { "domain"
+                { alphanumericattributes:
+                    { "ventilation" } } } } },
+  constraints:
+    { "architecture"
+        { architecture:
+            { #steel-constraintexpressions-1 "600 < e < 1200"
+                { hasvariables:
+                    { steel-variablenames-1 },
+                  issolvedby:
+                    { steel-constraintsolvers-1 } },
+              #steel-constraintexpressions-2 "d > 300"
+                { hasvariables:
+                    { steel-variablenames-2 },
+                  issolvedby:
+                    { steel-constraintsolvers-1 } },
+              #steel-constraintexpressions-3 "x < 1000"
+                { hasvariables:
+                    { steel-variablenames-3 },
+                  issolvedby:
+                    { steel-constraintsolvers-1 } } } },
+      "contracting"
+        { contracting:
+            { #steel-constraintexpressions-4 "e > d + 50"
+                { hasvariables:
+                    { steel-variablenames-2,
+                      steel-variablenames-1 },
+                  issolvedby:
+                    { steel-constraintsolvers-2 } },
+              #steel-constraintexpressions-5 "x > 700"
+                { hasvariables:
+                    { steel-variablenames-3 },
+                  issolvedby:
+                    { steel-constraintsolvers-2 } } } },
+      "engineering"
+        { engineering:
+            { #steel-constraintexpressions-6 "d < 400"
+                { hasvariables:
+                    { steel-variablenames-2 },
+                  issolvedby:
+                    { steel-constraintsolvers-3 } },
+              #steel-constraintexpressions-7 "e > 900"
+                { hasvariables:
+                    { steel-variablenames-1 },
+                  issolvedby:
+                    { steel-constraintsolvers-3 } },
+              #steel-constraintexpressions-8 "x > 2d"
+                { hasvariables:
+                    { steel-variablenames-2,
+                      steel-variablenames-3 },
+                  issolvedby:
+                    { steel-constraintsolvers-3 } } } } },
+  documents:
+    { "http://caad.arch.ethz.ch/~stouffs/research/sorts/scripts/steel/criteria.html",
+      "http://caad.arch.ethz.ch/~stouffs/research/sorts/scripts/steel/zm_example.html" },
+  images:
+    { ("http://caad.arch.ethz.ch/~stouffs/research/sorts/scripts/steel/zm_building1.html", "http://caad.arch.ethz.ch/~stouffs/research/sorts/scripts/steel/icons/zm_building1.gif"),
+      ("http://caad.arch.ethz.ch/~stouffs/research/sorts/scripts/steel/zm_building2.html", "http://caad.arch.ethz.ch/~stouffs/research/sorts/scripts/steel/icons/zm_building2.gif") },
+  solvers:
+    { #steel-constraintsolvers-1 "http://liawww.epfl.ch/lottaz-cgi-bin/SpaceSolver/entry.pl?user=architect&project=steel"
+        { (attributenames ^ solverattributes):
+            { "title"
+                { alphanumericattributes:
+                    { "SpaceSolver for Architect" } } },
+          solves:
+            { steel-constraintexpressions-1,
+              steel-constraintexpressions-2,
+              steel-constraintexpressions-3 } },
+      #steel-constraintsolvers-2 "http://liawww.epfl.ch/lottaz-cgi-bin/SpaceSolver/entry.pl?user=contractor&project=steel"
+        { (attributenames ^ solverattributes):
+            { "title"
+                { alphanumericattributes:
+                    { "SpaceSolver for Contractor" } } },
+          solves:
+            { steel-constraintexpressions-4,
+              steel-constraintexpressions-5 } },
+      #steel-constraintsolvers-3 "http://liawww.epfl.ch/lottaz-cgi-bin/SpaceSolver/entry.pl?user=engineer&project=steel"
+        { (attributenames ^ solverattributes):
+            { "title"
+                { alphanumericattributes:
+                    { "SpaceSolver for Engineer" } } },
+          solves:
+            { steel-constraintexpressions-6,
+              steel-constraintexpressions-7,
+              steel-constraintexpressions-8 } } },
+  story:
+    { ("http://caad.arch.ethz.ch/~stouffs/research/sorts/scripts/steel/zm-step1.html", "http://caad.arch.ethz.ch/~stouffs/research/sorts/scripts/steel/icons/zm-step1.gif"),
+      ("http://caad.arch.ethz.ch/~stouffs/research/sorts/scripts/steel/zm-step2.html", "http://caad.arch.ethz.ch/~stouffs/research/sorts/scripts/steel/icons/zm-step2.gif"),
+      ("http://caad.arch.ethz.ch/~stouffs/research/sorts/scripts/steel/zm-step3.html", "http://caad.arch.ethz.ch/~stouffs/research/sorts/scripts/steel/icons/zm-step3-4.gif"),
+      ("http://caad.arch.ethz.ch/~stouffs/research/sorts/scripts/steel/zm-step4.html", "http://caad.arch.ethz.ch/~stouffs/research/sorts/scripts/steel/icons/zm-step3-4.gif") },
+  variables:
+    { #steel-variablenames-2 "d"
+        { (attributenames ^ variableattributes):
+            { "default"
+                { numericattributes:
+                    { 300.0 } },
+              "description"
+                { alphanumericattributes:
+                    { "diameter of the hole" } },
+              "dimension"
+                { alphanumericattributes:
+                    { "mm" } },
+              "max"
+                { numericattributes:
+                    { 500.0 } },
+              "min"
+                { numericattributes:
+                    { 100.0 } } },
+          hasconstraints:
+            { steel-constraintexpressions-6,
+              steel-constraintexpressions-2,
+              steel-constraintexpressions-4,
+              steel-constraintexpressions-8 } },
+      #steel-variablenames-1 "e"
+        { (attributenames ^ variableattributes):
+            { "default"
+                { numericattributes:
+                    { 1000.0 } },
+              "description"
+                { alphanumericattributes:
+                    { "hole spacing" } },
+              "dimension"
+                { alphanumericattributes:
+                    { "mm" } },
+              "max"
+                { numericattributes:
+                    { 1300.0 } },
+              "min"
+                { numericattributes:
+                    { 700.0 } } },
+          hasconstraints:
+            { steel-constraintexpressions-1,
+              steel-constraintexpressions-7,
+              steel-constraintexpressions-4 } },
+      #steel-variablenames-3 "x"
+        { (attributenames ^ variableattributes):
+            { "default"
+                { numericattributes:
+                    { 800.0 } },
+              "description"
+                { alphanumericattributes:
+                    { "distance from edge of first hole to support" } },
+              "dimension"
+                { alphanumericattributes:
+                    { "mm" } },
+              "max"
+                { numericattributes:
+                    { 1100.0 } },
+              "min"
+                { numericattributes:
+                    { 500.0 } } },
+          hasconstraints:
+            { steel-constraintexpressions-3,
+              steel-constraintexpressions-8,
+              steel-constraintexpressions-5 } } } };
+
+form $arc = myconstraints:
+{ #steel-constraintexpressions-9 "600 < e < 1200"
+    { hasvariables:
+        { steel-variablenames-4 },
+      issolvedby:
+        { steel-constraintsolvers-4 },
+      solvers:
+        { #steel-constraintsolvers-4 "http://liawww.epfl.ch/lottaz-cgi-bin/SpaceSolver/entry.pl?user=architect&project=steel"
+            { (attributenames ^ solverattributes):
+                { "title"
+                    { alphanumericattributes:
+                        { "SpaceSolver for Architect" } } },
+              solves:
+                { steel-constraintexpressions-9,
+                  steel-constraintexpressions-10,
+                  steel-constraintexpressions-11 } } },
+      variables:
+        { #steel-variablenames-4 "e"
+            { (attributenames ^ variableattributes):
+                { "default"
+                    { numericattributes:
+                        { 1000.0 } },
+                  "description"
+                    { alphanumericattributes:
+                        { "hole spacing" } },
+                  "dimension"
+                    { alphanumericattributes:
+                        { "mm" } },
+                  "max"
+                    { numericattributes:
+                        { 1300.0 } },
+                  "min"
+                    { numericattributes:
+                        { 700.0 } } },
+              contracting:
+                { #steel-constraintexpressions-12 "e > d + 50"
+                    { hasvariables:
+                        { steel-variablenames-5,
+                          steel-variablenames-4 },
+                      issolvedby:
+                        { steel-constraintsolvers-5 } } },
+              engineering:
+                { #steel-constraintexpressions-13 "e > 900"
+                    { hasvariables:
+                        { steel-variablenames-4 },
+                      issolvedby:
+                        { steel-constraintsolvers-6 } } },
+              hasconstraints:
+                { steel-constraintexpressions-9,
+                  steel-constraintexpressions-13,
+                  steel-constraintexpressions-12 } } } },
+  #steel-constraintexpressions-10 "d > 300"
+    { hasvariables:
+        { steel-variablenames-5 },
+      issolvedby:
+        { steel-constraintsolvers-4 },
+      solvers:
+        { #steel-constraintsolvers-4 "http://liawww.epfl.ch/lottaz-cgi-bin/SpaceSolver/entry.pl?user=architect&project=steel"
+            { (attributenames ^ solverattributes):
+                { "title"
+                    { alphanumericattributes:
+                        { "SpaceSolver for Architect" } } },
+              solves:
+                { steel-constraintexpressions-9,
+                  steel-constraintexpressions-10,
+                  steel-constraintexpressions-11 } } },
+      variables:
+        { #steel-variablenames-5 "d"
+            { (attributenames ^ variableattributes):
+                { "default"
+                    { numericattributes:
+                        { 300.0 } },
+                  "description"
+                    { alphanumericattributes:
+                        { "diameter of the hole" } },
+                  "dimension"
+                    { alphanumericattributes:
+                        { "mm" } },
+                  "max"
+                    { numericattributes:
+                        { 500.0 } },
+                  "min"
+                    { numericattributes:
+                        { 100.0 } } },
+              contracting:
+                { #steel-constraintexpressions-12 "e > d + 50"
+                    { hasvariables:
+                        { steel-variablenames-5,
+                          steel-variablenames-4 },
+                      issolvedby:
+                        { steel-constraintsolvers-5 } } },
+              engineering:
+                { #steel-constraintexpressions-14 "d < 400"
+                    { hasvariables:
+                        { steel-variablenames-5 },
+                      issolvedby:
+                        { steel-constraintsolvers-6 } },
+                  #steel-constraintexpressions-15 "x > 2d"
+                    { hasvariables:
+                        { steel-variablenames-5,
+                          steel-variablenames-6 },
+                      issolvedby:
+                        { steel-constraintsolvers-6 } } },
+              hasconstraints:
+                { steel-constraintexpressions-14,
+                  steel-constraintexpressions-10,
+                  steel-constraintexpressions-12,
+                  steel-constraintexpressions-15 } } } },
+  #steel-constraintexpressions-11 "x < 1000"
+    { hasvariables:
+        { steel-variablenames-6 },
+      issolvedby:
+        { steel-constraintsolvers-4 },
+      solvers:
+        { #steel-constraintsolvers-4 "http://liawww.epfl.ch/lottaz-cgi-bin/SpaceSolver/entry.pl?user=architect&project=steel"
+            { (attributenames ^ solverattributes):
+                { "title"
+                    { alphanumericattributes:
+                        { "SpaceSolver for Architect" } } },
+              solves:
+                { steel-constraintexpressions-9,
+                  steel-constraintexpressions-10,
+                  steel-constraintexpressions-11 } } },
+      variables:
+        { #steel-variablenames-6 "x"
+            { (attributenames ^ variableattributes):
+                { "default"
+                    { numericattributes:
+                        { 800.0 } },
+                  "description"
+                    { alphanumericattributes:
+                        { "distance from edge of first hole to support" } },
+                  "dimension"
+                    { alphanumericattributes:
+                        { "mm" } },
+                  "max"
+                    { numericattributes:
+                        { 1100.0 } },
+                  "min"
+                    { numericattributes:
+                        { 500.0 } } },
+              contracting:
+                { #steel-constraintexpressions-16 "x > 700"
+                    { hasvariables:
+                        { steel-variablenames-6 },
+                      issolvedby:
+                        { steel-constraintsolvers-5 } } },
+              engineering:
+                { #steel-constraintexpressions-15 "x > 2d"
+                    { hasvariables:
+                        { steel-variablenames-5,
+                          steel-variablenames-6 },
+                      issolvedby:
+                        { steel-constraintsolvers-6 } } },
+              hasconstraints:
+                { steel-constraintexpressions-11,
+                  steel-constraintexpressions-15,
+                  steel-constraintexpressions-16 } } } } };
+
+form $eng = myconstraints:
+{ #steel-constraintexpressions-17 "d < 400"
+    { hasvariables:
+        { steel-variablenames-7 },
+      issolvedby:
+        { steel-constraintsolvers-7 },
+      solvers:
+        { #steel-constraintsolvers-7 "http://liawww.epfl.ch/lottaz-cgi-bin/SpaceSolver/entry.pl?user=engineer&project=steel"
+            { (attributenames ^ solverattributes):
+                { "title"
+                    { alphanumericattributes:
+                        { "SpaceSolver for Engineer" } } },
+              solves:
+                { steel-constraintexpressions-17,
+                  steel-constraintexpressions-18,
+                  steel-constraintexpressions-19 } } },
+      variables:
+        { #steel-variablenames-7 "d"
+            { architecture:
+                { #steel-constraintexpressions-20 "d > 300"
+                    { hasvariables:
+                        { steel-variablenames-7 },
+                      issolvedby:
+                        { steel-constraintsolvers-8 } } },
+              (attributenames ^ variableattributes):
+                { "default"
+                    { numericattributes:
+                        { 300.0 } },
+                  "description"
+                    { alphanumericattributes:
+                        { "diameter of the hole" } },
+                  "dimension"
+                    { alphanumericattributes:
+                        { "mm" } },
+                  "max"
+                    { numericattributes:
+                        { 500.0 } },
+                  "min"
+                    { numericattributes:
+                        { 100.0 } } },
+              contracting:
+                { #steel-constraintexpressions-21 "e > d + 50"
+                    { hasvariables:
+                        { steel-variablenames-7,
+                          steel-variablenames-8 },
+                      issolvedby:
+                        { steel-constraintsolvers-9 } } },
+              hasconstraints:
+                { steel-constraintexpressions-17,
+                  steel-constraintexpressions-20,
+                  steel-constraintexpressions-21,
+                  steel-constraintexpressions-19 } } } },
+  #steel-constraintexpressions-18 "e > 900"
+    { hasvariables:
+        { steel-variablenames-8 },
+      issolvedby:
+        { steel-constraintsolvers-7 },
+      solvers:
+        { #steel-constraintsolvers-7 "http://liawww.epfl.ch/lottaz-cgi-bin/SpaceSolver/entry.pl?user=engineer&project=steel"
+            { (attributenames ^ solverattributes):
+                { "title"
+                    { alphanumericattributes:
+                        { "SpaceSolver for Engineer" } } },
+              solves:
+                { steel-constraintexpressions-17,
+                  steel-constraintexpressions-18,
+                  steel-constraintexpressions-19 } } },
+      variables:
+        { #steel-variablenames-8 "e"
+            { architecture:
+                { #steel-constraintexpressions-22 "600 < e < 1200"
+                    { hasvariables:
+                        { steel-variablenames-8 },
+                      issolvedby:
+                        { steel-constraintsolvers-8 } } },
+              (attributenames ^ variableattributes):
+                { "default"
+                    { numericattributes:
+                        { 1000.0 } },
+                  "description"
+                    { alphanumericattributes:
+                        { "hole spacing" } },
+                  "dimension"
+                    { alphanumericattributes:
+                        { "mm" } },
+                  "max"
+                    { numericattributes:
+                        { 1300.0 } },
+                  "min"
+                    { numericattributes:
+                        { 700.0 } } },
+              contracting:
+                { #steel-constraintexpressions-21 "e > d + 50"
+                    { hasvariables:
+                        { steel-variablenames-7,
+                          steel-variablenames-8 },
+                      issolvedby:
+                        { steel-constraintsolvers-9 } } },
+              hasconstraints:
+                { steel-constraintexpressions-22,
+                  steel-constraintexpressions-18,
+                  steel-constraintexpressions-21 } } } },
+  #steel-constraintexpressions-19 "x > 2d"
+    { hasvariables:
+        { steel-variablenames-7, steel-variablenames-9 },
+      issolvedby:
+        { steel-constraintsolvers-7 },
+      solvers:
+        { #steel-constraintsolvers-7 "http://liawww.epfl.ch/lottaz-cgi-bin/SpaceSolver/entry.pl?user=engineer&project=steel"
+            { (attributenames ^ solverattributes):
+                { "title"
+                    { alphanumericattributes:
+                        { "SpaceSolver for Engineer" } } },
+              solves:
+                { steel-constraintexpressions-17,
+                  steel-constraintexpressions-18,
+                  steel-constraintexpressions-19 } } },
+      variables:
+        { #steel-variablenames-7 "d"
+            { architecture:
+                { #steel-constraintexpressions-20 "d > 300"
+                    { hasvariables:
+                        { steel-variablenames-7 },
+                      issolvedby:
+                        { steel-constraintsolvers-8 } } },
+              (attributenames ^ variableattributes):
+                { "default"
+                    { numericattributes:
+                        { 300.0 } },
+                  "description"
+                    { alphanumericattributes:
+                        { "diameter of the hole" } },
+                  "dimension"
+                    { alphanumericattributes:
+                        { "mm" } },
+                  "max"
+                    { numericattributes:
+                        { 500.0 } },
+                  "min"
+                    { numericattributes:
+                        { 100.0 } } },
+              contracting:
+                { #steel-constraintexpressions-21 "e > d + 50"
+                    { hasvariables:
+                        { steel-variablenames-7,
+                          steel-variablenames-8 },
+                      issolvedby:
+                        { steel-constraintsolvers-9 } } },
+              hasconstraints:
+                { steel-constraintexpressions-17,
+                  steel-constraintexpressions-20,
+                  steel-constraintexpressions-21,
+                  steel-constraintexpressions-19 } },
+          #steel-variablenames-9 "x"
+            { architecture:
+                { #steel-constraintexpressions-23 "x < 1000"
+                    { hasvariables:
+                        { steel-variablenames-9 },
+                      issolvedby:
+                        { steel-constraintsolvers-8 } } },
+              (attributenames ^ variableattributes):
+                { "default"
+                    { numericattributes:
+                        { 800.0 } },
+                  "description"
+                    { alphanumericattributes:
+                        { "distance from edge of first hole to support" } },
+                  "dimension"
+                    { alphanumericattributes:
+                        { "mm" } },
+                  "max"
+                    { numericattributes:
+                        { 1100.0 } },
+                  "min"
+                    { numericattributes:
+                        { 500.0 } } },
+              contracting:
+                { #steel-constraintexpressions-24 "x > 700"
+                    { hasvariables:
+                        { steel-variablenames-9 },
+                      issolvedby:
+                        { steel-constraintsolvers-9 } } },
+              hasconstraints:
+                { steel-constraintexpressions-23,
+                  steel-constraintexpressions-19,
+                  steel-constraintexpressions-24 } } } } };
+
+form $con = myconstraints:
+{ #steel-constraintexpressions-25 "e > d + 50"
+    { hasvariables:
+        { steel-variablenames-10, steel-variablenames-11 },
+      issolvedby:
+        { steel-constraintsolvers-10 },
+      solvers:
+        { #steel-constraintsolvers-10 "http://liawww.epfl.ch/lottaz-cgi-bin/SpaceSolver/entry.pl?user=contractor&project=steel"
+            { (attributenames ^ solverattributes):
+                { "title"
+                    { alphanumericattributes:
+                        { "SpaceSolver for Contractor" } } },
+              solves:
+                { steel-constraintexpressions-25,
+                  steel-constraintexpressions-26 } } },
+      variables:
+        { #steel-variablenames-10 "d"
+            { architecture:
+                { #steel-constraintexpressions-27 "d > 300"
+                    { hasvariables:
+                        { steel-variablenames-10 },
+                      issolvedby:
+                        { steel-constraintsolvers-11 } } },
+              (attributenames ^ variableattributes):
+                { "default"
+                    { numericattributes:
+                        { 300.0 } },
+                  "description"
+                    { alphanumericattributes:
+                        { "diameter of the hole" } },
+                  "dimension"
+                    { alphanumericattributes:
+                        { "mm" } },
+                  "max"
+                    { numericattributes:
+                        { 500.0 } },
+                  "min"
+                    { numericattributes:
+                        { 100.0 } } },
+              engineering:
+                { #steel-constraintexpressions-28 "d < 400"
+                    { hasvariables:
+                        { steel-variablenames-10 },
+                      issolvedby:
+                        { steel-constraintsolvers-12 } },
+                  #steel-constraintexpressions-29 "x > 2d"
+                    { hasvariables:
+                        { steel-variablenames-10,
+                          steel-variablenames-12 },
+                      issolvedby:
+                        { steel-constraintsolvers-12 } } },
+              hasconstraints:
+                { steel-constraintexpressions-28,
+                  steel-constraintexpressions-27,
+                  steel-constraintexpressions-25,
+                  steel-constraintexpressions-29 } },
+          #steel-variablenames-11 "e"
+            { architecture:
+                { #steel-constraintexpressions-30 "600 < e < 1200"
+                    { hasvariables:
+                        { steel-variablenames-11 },
+                      issolvedby:
+                        { steel-constraintsolvers-11 } } },
+              (attributenames ^ variableattributes):
+                { "default"
+                    { numericattributes:
+                        { 1000.0 } },
+                  "description"
+                    { alphanumericattributes:
+                        { "hole spacing" } },
+                  "dimension"
+                    { alphanumericattributes:
+                        { "mm" } },
+                  "max"
+                    { numericattributes:
+                        { 1300.0 } },
+                  "min"
+                    { numericattributes:
+                        { 700.0 } } },
+              engineering:
+                { #steel-constraintexpressions-31 "e > 900"
+                    { hasvariables:
+                        { steel-variablenames-11 },
+                      issolvedby:
+                        { steel-constraintsolvers-12 } } },
+              hasconstraints:
+                { steel-constraintexpressions-30,
+                  steel-constraintexpressions-31,
+                  steel-constraintexpressions-25 } } } },
+  #steel-constraintexpressions-26 "x > 700"
+    { hasvariables:
+        { steel-variablenames-12 },
+      issolvedby:
+        { steel-constraintsolvers-10 },
+      solvers:
+        { #steel-constraintsolvers-10 "http://liawww.epfl.ch/lottaz-cgi-bin/SpaceSolver/entry.pl?user=contractor&project=steel"
+            { (attributenames ^ solverattributes):
+                { "title"
+                    { alphanumericattributes:
+                        { "SpaceSolver for Contractor" } } },
+              solves:
+                { steel-constraintexpressions-25,
+                  steel-constraintexpressions-26 } } },
+      variables:
+        { #steel-variablenames-12 "x"
+            { architecture:
+                { #steel-constraintexpressions-32 "x < 1000"
+                    { hasvariables:
+                        { steel-variablenames-12 },
+                      issolvedby:
+                        { steel-constraintsolvers-11 } } },
+              (attributenames ^ variableattributes):
+                { "default"
+                    { numericattributes:
+                        { 800.0 } },
+                  "description"
+                    { alphanumericattributes:
+                        { "distance from edge of first hole to support" } },
+                  "dimension"
+                    { alphanumericattributes:
+                        { "mm" } },
+                  "max"
+                    { numericattributes:
+                        { 1100.0 } },
+                  "min"
+                    { numericattributes:
+                        { 500.0 } } },
+              engineering:
+                { #steel-constraintexpressions-29 "x > 2d"
+                    { hasvariables:
+                        { steel-variablenames-10,
+                          steel-variablenames-12 },
+                      issolvedby:
+                        { steel-constraintsolvers-12 } } },
+              hasconstraints:
+                { steel-constraintexpressions-32,
+                  steel-constraintexpressions-29,
+                  steel-constraintexpressions-26 } } } } };

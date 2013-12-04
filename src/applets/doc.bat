@@ -1,0 +1,1 @@
+"D:\Program Files\jdk1.3\bin\javadoc.exe" -d ..\doc blue

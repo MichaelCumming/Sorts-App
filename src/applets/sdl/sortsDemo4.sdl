@@ -1,0 +1,34 @@
+#SDL V1.1a [sortsDemo1]
+
+sort types : [Label];
+sort graphical_elements : [LineSegment];
+sort costs : [Weight] (1.0);
+sort all : types ^ graphical_elements + types ^ costs;
+
+
+form $db = all:
+{ (types ^ graphical_elements):
+	{ 
+	"wall"
+		{ 
+		<(10,10,0), (50,10,0)>,
+		<(10,40,0), (10,10,0)>			
+		},
+		
+	"door"
+		{ <(25,10,0), (35,10,0)> },
+	"window"
+		{ 
+		<(50,20,0), (50,30,0)>,
+		<(40,40,0), (25,40,0)> 
+		}
+	},
+
+(types ^ costs):
+	{
+	"wall"
+		{ 0.5 },
+	"window" 
+		{ 0.75 }
+	}
+};
