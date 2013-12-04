@@ -1,8 +1,8 @@
-#The Concept of Sorts
+###The Concept of Sorts
 by Rudi Stouffs, Ph.D.
 17 July 1996
 
-##Concepts
+####Concepts
 Information types define sorts, e.g., points, labels, lines.
 The basic element of a sort is an individual, e.g.,
 a point is an individual of the sort of points.
@@ -43,9 +43,9 @@ metaform.
 
 ##Functionality of the kernel
 
-A. Sorts and Metaforms: The basic approach.
+###A. Sorts and Metaforms: The basic approach.
 
-1. How to create a (composite) sort.
+####1. How to create a (composite) sort.
 
 A composite sort is created according to a given definition,
 specified as a parsable string.
@@ -97,7 +97,7 @@ I envision to extend the specification of an expression factor as follows:
 		symdifference '(' identifier ',' identifier ')' |
 		'(' expression ')' | '[' char_ind ']' | identifier
 
-2. How to create a metaform
+####2. How to create a metaform
 
 Upon creating a metaform, one must specify the corresponding composite sort,
 either by the sort object or by its name.
@@ -116,7 +116,7 @@ C:	MetaForm m1 = meta_form(s1);
 
 Name denotes the name of a sort that has been assigned a definition before.
 
-3. How to create an individual
+####3. How to create an individual
 
 Currently, the following characteristic individuals are supported:
 Point, Line, LineSegment, Label, Real, Fractional.
@@ -162,7 +162,7 @@ C:	long x = .., y = .., z = .., w = ..;
 	v_free(u); v_free(v);
 	c_free(xc); c_free(yc); c_free(zc); r_free(wr); 
 
-4. How to add an individual to a metaform
+####4. How to add an individual to a metaform
 
 The function checks if the individual's simple sort is a component
 of the metaform's composite sort.
@@ -172,7 +172,7 @@ Java:	m1.add(i1);
 
 C:	add(m1, i1);
 
-5. How to compare (composite) sorts
+####5. How to compare (composite) sorts
 
 Sorts can be compared for equality or to see if one is a part of the other.
 
@@ -186,7 +186,7 @@ Two composite sort are equal if they have the exact same simple sort components.
 A composite sort is a part of another composite sort if the components
 of the first sort are also all components of the second sort.
 
-5. How to compare metaforms
+####6. How to compare metaforms
 
 Metaforms can be compared for equality or to see if one is a part of the other.
 
@@ -202,7 +202,7 @@ do not belong to the same sort, for example, if one sort is a part of another.
 The above functions allow metaforms to be compared only if
 one sort is a part of the other (in whatever order) or these are equal.
 
-6. How to perform algebraic operations on metaforms
+####7. How to perform algebraic operations on metaforms
 
 The following algebraic operations are available on metaforms:
 sum, difference, product and symmetric difference are binary operations
@@ -231,7 +231,7 @@ The partition function places the respective differences in both operand
 arguments and the product in the additional third argument.
 This third argument metaform is first purged if it was not empty.
 
-7. How to duplicate a metaform.
+####8. How to duplicate a metaform.
 
 There are two forms of duplicate: The first assigns a complete duplicate
 to a metaform variable; the second duplicates the metaform's forms
@@ -247,7 +247,7 @@ C:	MetaForm m2 = duplicate(m1);
 	MetaForm m3 = meta_form(sort_of(m1));
 	duplicate_into(m3, m1);
 
-8. How to output sorts.
+####9. How to output sorts.
 
 Two output forms exists for (composite) sorts: One prints the sort
 to standard out, the other provides a string version of the sort.
@@ -264,7 +264,7 @@ C:	StringBuffer out_buffer = string_buffer();
 	recycle_buffer(out_buffer);
 	print_it(s1);
 
-9. How to output metaforms.
+####10. How to output metaforms.
 
 Two output forms exists for metaforms: One prints the metaform to standard
 out, the other provides a string version of the metaform.
